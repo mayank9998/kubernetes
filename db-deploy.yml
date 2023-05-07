@@ -7,7 +7,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: vprodb
+      app: vprodb
   replicas: 1
 
   template:
@@ -18,9 +18,9 @@ spec:
       containers:
         - name: vprodb
           image: vprofile/vprofiledb:V1
-          args: "--ignore-db-dir=lost+found"
+          args:
+            - "--ignore-db-dir=lost+found"
           volumeMounts:
-            volume:
               - name: vprodb-data
                 mountPath: /var/lib/mysql
           ports:
@@ -37,5 +37,5 @@ spec:
       volumes:
         - name: vprodb-data
           awsElasticBlockStore:
-          volumeID: vol-010e1588260e15271
-          fsType: ext4
+            volumeID: vol-0c915e1dae4a42ad8 
+            fsType: ext4
